@@ -13,6 +13,11 @@
 		11BBE9602B8FC12F00AA34D2 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 11BBE95E2B8FC12F00AA34D2 /* Main.storyboard */; };
 		11BBE9622B8FC13000AA34D2 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 11BBE9612B8FC13000AA34D2 /* Assets.xcassets */; };
 		11BBE9652B8FC13000AA34D2 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 11BBE9632B8FC13000AA34D2 /* LaunchScreen.storyboard */; };
+		11BBE9702B8FC7B300AA34D2 /* PlaceListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11BBE96F2B8FC7B300AA34D2 /* PlaceListViewController.swift */; };
+		11BBE9722B8FF26500AA34D2 /* PlaceModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11BBE9712B8FF26500AA34D2 /* PlaceModel.swift */; };
+		11BBE9742B8FF7C100AA34D2 /* PlaceCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11BBE9732B8FF7C100AA34D2 /* PlaceCell.swift */; };
+		11BBE9982B90E3F900AA34D2 /* PlaceDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11BBE9972B90E3F900AA34D2 /* PlaceDetailViewController.swift */; };
+		11BBE99A2B91284200AA34D2 /*  PlaceAnnotationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11BBE9992B91284100AA34D2 /*  PlaceAnnotationView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -24,6 +29,11 @@
 		11BBE9612B8FC13000AA34D2 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		11BBE9642B8FC13000AA34D2 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		11BBE9662B8FC13000AA34D2 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		11BBE96F2B8FC7B300AA34D2 /* PlaceListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlaceListViewController.swift; sourceTree = "<group>"; };
+		11BBE9712B8FF26500AA34D2 /* PlaceModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlaceModel.swift; sourceTree = "<group>"; };
+		11BBE9732B8FF7C100AA34D2 /* PlaceCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlaceCell.swift; sourceTree = "<group>"; };
+		11BBE9972B90E3F900AA34D2 /* PlaceDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlaceDetailViewController.swift; sourceTree = "<group>"; };
+		11BBE9992B91284100AA34D2 /*  PlaceAnnotationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = " PlaceAnnotationView.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -56,15 +66,44 @@
 		11BBE9572B8FC12F00AA34D2 /* ScavengerHunt */ = {
 			isa = PBXGroup;
 			children = (
+				11BBE96E2B8FC6E300AA34D2 /* ViewController */,
+				11BBE96D2B8FC6D000AA34D2 /* Models */,
+				11BBE96C2B8FC6B400AA34D2 /* Views */,
 				11BBE9582B8FC12F00AA34D2 /* AppDelegate.swift */,
 				11BBE95A2B8FC12F00AA34D2 /* SceneDelegate.swift */,
-				11BBE95C2B8FC12F00AA34D2 /* ViewController.swift */,
 				11BBE95E2B8FC12F00AA34D2 /* Main.storyboard */,
 				11BBE9612B8FC13000AA34D2 /* Assets.xcassets */,
 				11BBE9632B8FC13000AA34D2 /* LaunchScreen.storyboard */,
 				11BBE9662B8FC13000AA34D2 /* Info.plist */,
 			);
 			path = ScavengerHunt;
+			sourceTree = "<group>";
+		};
+		11BBE96C2B8FC6B400AA34D2 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				11BBE9732B8FF7C100AA34D2 /* PlaceCell.swift */,
+				11BBE9992B91284100AA34D2 /*  PlaceAnnotationView.swift */,
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
+		11BBE96D2B8FC6D000AA34D2 /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				11BBE9712B8FF26500AA34D2 /* PlaceModel.swift */,
+			);
+			path = Models;
+			sourceTree = "<group>";
+		};
+		11BBE96E2B8FC6E300AA34D2 /* ViewController */ = {
+			isa = PBXGroup;
+			children = (
+				11BBE95C2B8FC12F00AA34D2 /* ViewController.swift */,
+				11BBE96F2B8FC7B300AA34D2 /* PlaceListViewController.swift */,
+				11BBE9972B90E3F900AA34D2 /* PlaceDetailViewController.swift */,
+			);
+			path = ViewController;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -138,8 +177,13 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				11BBE99A2B91284200AA34D2 /*  PlaceAnnotationView.swift in Sources */,
 				11BBE95D2B8FC12F00AA34D2 /* ViewController.swift in Sources */,
+				11BBE9702B8FC7B300AA34D2 /* PlaceListViewController.swift in Sources */,
+				11BBE9722B8FF26500AA34D2 /* PlaceModel.swift in Sources */,
 				11BBE9592B8FC12F00AA34D2 /* AppDelegate.swift in Sources */,
+				11BBE9742B8FF7C100AA34D2 /* PlaceCell.swift in Sources */,
+				11BBE9982B90E3F900AA34D2 /* PlaceDetailViewController.swift in Sources */,
 				11BBE95B2B8FC12F00AA34D2 /* SceneDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

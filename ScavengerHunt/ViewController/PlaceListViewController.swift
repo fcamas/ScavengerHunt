@@ -1,5 +1,5 @@
 //
-//  TaskListViewController.swift
+//  PlaceListViewController.swift
 //  ScavengerHunt
 //
 //  Created by Fredy Camas on 2/28/24.
@@ -9,16 +9,16 @@ import UIKit
 
 struct Constants{
     
-    static let taskIdentifier = "TaskCell"
+    static let placeIdentifier = "PlaceCell"
 }
 
 class PlaceListViewController: UIViewController {
     var tableView: UITableView!
     var emptyStateLabel: UILabel!
     
-    var tasks = [Task]() {
+    var places = [Place]() {
         didSet {
-            emptyStateLabel.isHidden = !tasks.isEmpty
+            emptyStateLabel.isHidden = !places.isEmpty
             tableView.reloadData()
         }
     }
@@ -46,7 +46,7 @@ class PlaceListViewController: UIViewController {
     private func setupUI() {
         //Table View Programmatically
         tableView = UITableView(frame: view.bounds, style: .plain)
-        tableView.register(TaskCell.self, forCellReuseIdentifier: Constants.taskIdentifier)
+        tableView.register(PlaceCell.self, forCellReuseIdentifier: Constants.placeIdentifier)
         tableView.dataSource = self
         tableView.delegate = self
         view.addSubview(tableView)
@@ -55,7 +55,7 @@ class PlaceListViewController: UIViewController {
         emptyStateLabel = UILabel(frame: CGRect(x: 0, y: 0, width: view.bounds.width, height: 50))
         emptyStateLabel.center = view.center
         emptyStateLabel.textAlignment = .center
-        emptyStateLabel.text = "No tasks"
+        emptyStateLabel.text = "No Places"
         view.addSubview(emptyStateLabel)
         
         // Set navigation item title
@@ -63,38 +63,40 @@ class PlaceListViewController: UIViewController {
     }
     
     private func populateMockData(){
-        tasks = Task.mockedTasks
+        places = Place.mockedPlaces
     }
+    
+    //MARK: - to implement  add more task (optional)
 
-    
-    // Function to present the compose view controller
-//    func presentComposeViewController(){
-//        let composeViewController = TaskComposeViewController()
-//        
-//        //Update the task array for any new task passed back
-//        composeViewController.onComposeTask = { [weak self] task in
-//            self?.tasks.append(task)
-//        }
-//        let composeNavController = UINavigationController(rootViewController: composeViewController)
-//        self.present(composeNavController, animated: true, completion: nil)
-//    }
-    
+/*
+     Function to present the compose view controller
+    func presentComposeViewController(){
+        let composeViewController = PlaceComposeViewController()
+        
+        //Update the place array for any new task passed back
+        composeViewController.onComposeTask = { [weak self] place in
+            self?.places.append(place)
+        }
+        let composeNavController = UINavigationController(rootViewController: composeViewController)
+        self.present(composeNavController, animated: true, completion: nil)
+    }
+    */
     //Function to presetn the detail view controller
-    func presentDetailViewController(for task: Task){
-        let detailViewController = TaskDetailViewController()
-        detailViewController.task = task
+    func presentDetailViewController(for task: Place){
+        let detailViewController = PlaceDetailViewController()
+        detailViewController.place = task
         self.navigationController?.pushViewController(detailViewController, animated: true)
     }
 }
 
 extension PlaceListViewController: UITableViewDataSource{
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return tasks.count
+        return places.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: Constants.taskIdentifier, for: indexPath) as! TaskCell
-        cell.configure(with: tasks[indexPath.row])
+        let cell = tableView.dequeueReusableCell(withIdentifier: Constants.placeIdentifier, for: indexPath) as! PlaceCell
+        cell.configure(with: places[indexPath.row])
         return cell
     }
 
@@ -103,6 +105,6 @@ extension PlaceListViewController: UITableViewDataSource{
 extension PlaceListViewController: UITableViewDelegate {
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        presentDetailViewController(for: tasks[indexPath.row])
+        presentDetailViewController(for: places[indexPath.row])
     }
 }

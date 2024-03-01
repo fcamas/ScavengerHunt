@@ -1,5 +1,5 @@
 //
-//  TaskCell.swift
+//  PlaceCell.swift
 //  ScavengerHunt
 //
 //  Created by Fredy Camas on 2/28/24.
@@ -47,12 +47,12 @@ class PlaceCell: UITableViewCell {
         ])
     }
     
-    func configure(with task: Place){
-        titleLabel.text = task.title
-        titleLabel.textColor = task.isComplete ? .secondaryLabel : .label
-        completedImageView.image = UIImage(systemName: task.isComplete ? "circle.inset.filled" : "circle")?.withRenderingMode(.alwaysTemplate)
+    func configure(with place: Place){
+        titleLabel.text = place.title
+        titleLabel.textColor = place.isComplete ? .secondaryLabel : .label
+        completedImageView.image = UIImage(systemName: place.isComplete ? "checkmark.circle" : "circle")?.withRenderingMode(.alwaysTemplate)
          //completedImageView.tintColor = task.isComplete ? .systemBlue: .tertiaryLabel
-        completedImageView.tintColor = task.isComplete ? .systemBlue: .systemPurple
+        completedImageView.tintColor = place.isComplete ? .systemGreen: .systemRed
         
     }
 }

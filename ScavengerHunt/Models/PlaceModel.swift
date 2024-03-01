@@ -29,7 +29,7 @@ class Place{
 }
 
 extension Place {
-    static var mockedTasks: [Place] {
+    static var mockedPlaces: [Place] {
         return [
             
             Place(title: "Golden Gate Park",

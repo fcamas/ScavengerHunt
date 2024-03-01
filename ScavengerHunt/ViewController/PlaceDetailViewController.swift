@@ -1,5 +1,5 @@
 //
-//  TaskDetailViewController.swift
+//  PlaceDetailViewController.swift
 //  ScavengerHunt
 //
 //  Created by Fredy Camas on 2/29/24.
@@ -18,7 +18,7 @@ class PlaceDetailViewController: UIViewController {
     var mapView: MKMapView!
     
     
-    var task: Task!
+    var place: Place!
     
     // Constants for attachPhotoButton
     let buttonTitle = "Attach Photo"
@@ -51,6 +51,8 @@ class PlaceDetailViewController: UIViewController {
         view.addSubview(titleLabel)
         
         descriptionLabel.translatesAutoresizingMaskIntoConstraints = false
+        descriptionLabel.numberOfLines = 0 // Allow multiple lines
+        descriptionLabel.lineBreakMode = .byWordWrapping
         view.addSubview(descriptionLabel)
         
         // Set constants for attachPhotoButton
@@ -70,12 +72,17 @@ class PlaceDetailViewController: UIViewController {
             completedImageView.widthAnchor.constraint(equalToConstant: 24),
             completedImageView.heightAnchor.constraint(equalToConstant: 24),
             
-            titleLabel.topAnchor.constraint(equalTo: completedImageView.topAnchor),
-            titleLabel.leadingAnchor.constraint(equalTo: completedImageView.trailingAnchor, constant: 16),
+            completedLabel.topAnchor.constraint(equalTo: completedImageView.topAnchor),
+            completedLabel.leadingAnchor.constraint(equalTo: completedImageView.trailingAnchor, constant: 16),
+            completedLabel.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -16),
+            
+            titleLabel.topAnchor.constraint(equalTo: completedImageView.bottomAnchor, constant: 16),
+            titleLabel.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 16),
             titleLabel.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -16),
             
             descriptionLabel.topAnchor.constraint(equalTo: titleLabel.bottomAnchor, constant: 16),
             descriptionLabel.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 16),
+            descriptionLabel.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -16),
             
             mapView.topAnchor.constraint(equalTo: descriptionLabel.bottomAnchor, constant: 16),
             mapView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 16),
@@ -93,7 +100,7 @@ class PlaceDetailViewController: UIViewController {
             
         ])
         
-        mapView.register(TaskAnnotationView.self, forAnnotationViewWithReuseIdentifier: TaskAnnotationView.identifier)
+        mapView.register(PlaceAnnotationView.self, forAnnotationViewWithReuseIdentifier: PlaceAnnotationView.identifier)
         mapView.delegate = self
         mapView.layer.cornerRadius = 12
         
@@ -101,16 +108,18 @@ class PlaceDetailViewController: UIViewController {
     }
     
     private func updateUI() {
-        titleLabel.text = task.title
-        descriptionLabel.text = task.description
+        titleLabel.text = place.title
+        descriptionLabel.text = place.description
         
-        let completedImage = UIImage(systemName: task.isComplete ? "circle.inset.filled": "circle")
+        let completedImage = UIImage(systemName: place.isComplete ? "checkmark.circle": "circle")
         completedImageView.image = completedImage?.withRenderingMode(.alwaysTemplate)
-        completedLabel.text = task.isComplete ? "Complete" : "Incomplete"
+        completedLabel.text = place.isComplete ? "Complete" : "Incomplete"
         
-        let color: UIColor = task.isComplete ? .systemBlue : .systemPurple
+        let color: UIColor = place.isComplete ? .systemGreen : .systemRed
         completedImageView.tintColor = color
         completedLabel.textColor = color
+        
+        attachPhotoButton.isHidden = place.isComplete
         
     }
     
@@ -176,7 +185,7 @@ class PlaceDetailViewController: UIViewController {
     }
     
     func updateMapView() {
-        guard let imageLocation = task.imageLocation else { return }
+        guard let imageLocation = place.imageLocation else { return }
         let coordinate = imageLocation.coordinate
         let region = MKCoordinateRegion(center: coordinate, span: MKCoordinateSpan(latitudeDelta: 0.01, longitudeDelta: 0.01))
         
@@ -191,10 +200,10 @@ class PlaceDetailViewController: UIViewController {
 
 extension PlaceDetailViewController: MKMapViewDelegate{
     func mapView(_ mapView: MKMapView, viewFor annotation: MKAnnotation) -> MKAnnotationView? {
-        guard let annotationView = mapView.dequeueReusableAnnotationView(withIdentifier: TaskAnnotationView.identifier, for: annotation) as? TaskAnnotationView else {
+        guard let annotationView = mapView.dequeueReusableAnnotationView(withIdentifier: PlaceAnnotationView.identifier, for: annotation) as? PlaceAnnotationView else {
             fatalError("Unable to dequeue TaskAnnotationView")
         }
-        annotationView.configure(with: task.image)
+        annotationView.configure(with: place.image)
         return annotationView
     }
 }
@@ -241,7 +250,7 @@ extension PlaceDetailViewController: PHPickerViewControllerDelegate{
             DispatchQueue.main.async { [weak self] in
                 
                 //Set teh picked image and location on the task
-                self?.task.set(image, with: location)
+                self?.place.set(image, with: location)
                 
                 //Update the Ui since we've updated the task
                 self?.updateUI()
