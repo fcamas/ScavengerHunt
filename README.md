@@ -28,6 +28,7 @@ The following **additional** features are implemented:
 
 ## Video Walkthrough
 
+![Demo](https://github.com/fcamas/ScavengerHunt/assets/76220782/20b81e2d-d5ad-457f-9e58-a0ea469c0c87)
 
 
 ## Notes
